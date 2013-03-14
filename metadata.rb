@@ -6,6 +6,6 @@ version          "0.0.1"
 
 #recipe "custom_env::configure", "Intended as part of configure/deploy OpsWorks events."
 #recipe "custom_env::update", "Can be run independently of OpsWorks configure/deploy events."
-recipe "custom_env::testenv", "Test some logging..."
+recipe "opsworks_custom_env::testenv", "Test some logging..."
 
 depends "rightscale"
