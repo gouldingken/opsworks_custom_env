@@ -4,8 +4,7 @@
 Chef::Log.info("Listing Env Variables")
 
 #command "export TEST_VAR=helloNode"
-Chef::Log.info("To go in #{@deploy[:deploy_to]}/shared/config/vars.json")
-
+#Chef::Log.info("To go in #{@deploy[:deploy_to]}/shared/config/vars.json")
 
 node[:custom_env].each do |application, vars|
   Chef::Log.info("application: #{application}")
