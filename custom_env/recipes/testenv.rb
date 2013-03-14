@@ -13,3 +13,5 @@ node[:custom_env].each do |application, vars|
     Chef::Log.info("#{k}: #{v}")
   end
 end
+
+
