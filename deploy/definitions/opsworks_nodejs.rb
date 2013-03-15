@@ -1,10 +1,4 @@
 Chef::Log.info("Using override for opsworks_nodejs")
-tenv_vars = Array.new
-node[:custom_env].each do |k, v|
-  tenv_vars.push("#{k}=#{v}")
-end
-
-Chef::Log.info("env vars for node: #{tenv_vars.join(' ')}")
 
 define :opsworks_nodejs do
   deploy = params[:deploy_data]
