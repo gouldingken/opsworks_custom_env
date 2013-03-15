@@ -12,6 +12,14 @@ define :opsworks_nodejs do
     end
   end
 
+  env_vars = Array.new
+  node[:custom_env].each do |k, v|
+    env_vars.push("#{k}=#{v}")
+    Chef::Log.info("added env var: #{k}=#{v}")
+  end
+
+  Chef::Log.info("env vars for node: #{env_vars.join(' ')}")
+
   template "#{deploy[:deploy_to]}/shared/config/opsworks.js" do
     cookbook 'opsworks_nodejs'
     source 'opsworks.js.erb'
@@ -28,7 +36,7 @@ define :opsworks_nodejs do
     group 'root'
     mode '0644'
     variables(
-        :environment_vars => 'TEST_VAR=setByOverride3 TEST_VAR2=setByOverride4',
+        :environment_vars => env_vars.join(' '),
         :deploy => deploy,
         :application_name => application,
         :monitored_script => "#{deploy[:deploy_to]}/current/server.js"
