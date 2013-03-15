@@ -1,3 +1,5 @@
+Chef::Log.info("Using override for opsworks_nodejs")
+
 define :opsworks_nodejs do
   deploy = params[:deploy_data]
   application = params[:app]
