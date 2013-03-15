@@ -1,8 +1,17 @@
 Chef::Log.info("Using override for opsworks_nodejs")
+tenv_vars = Array.new
+node[:custom_env].each do |k, v|
+  tenv_vars.push("#{k}=#{v}")
+end
+
+Chef::Log.info("env vars for node: #{tenv_vars.join(' ')}")
 
 define :opsworks_nodejs do
   deploy = params[:deploy_data]
   application = params[:app]
+  env_vars = params[:env]
+
+  Chef::Log.info("opsworks_nodejs: #{env_vars}")
 
   service 'monit' do
     action :nothing
@@ -13,14 +22,6 @@ define :opsworks_nodejs do
       cwd "#{deploy[:deploy_to]}/current"
     end
   end
-
-  env_vars = Array.new
-  node[:custom_env].each do |k, v|
-    env_vars.push("#{k}=#{v}")
-    Chef::Log.info("added env var: #{k}=#{v}")
-  end
-
-  Chef::Log.info("env vars for node: #{env_vars.join(' ')}")
 
   template "#{deploy[:deploy_to]}/shared/config/opsworks.js" do
     cookbook 'opsworks_nodejs'
@@ -38,7 +39,7 @@ define :opsworks_nodejs do
     group 'root'
     mode '0644'
     variables(
-        :environment_vars => env_vars.join(' '),
+        :environment_vars => env_vars,
         :deploy => deploy,
         :application_name => application,
         :monitored_script => "#{deploy[:deploy_to]}/current/server.js"

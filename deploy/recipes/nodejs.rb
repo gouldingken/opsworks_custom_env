@@ -6,6 +6,12 @@ node[:deploy].each do |application, deploy|
     next
   end
 
+  env_vars = Array.new
+  node[:custom_env].each do |k, v|
+    env_vars.push("#{k}=#{v}")
+    Chef::Log.info("added env var: #{k}=#{v}")
+  end
+
   opsworks_deploy_dir do
     user deploy[:user]
     group deploy[:group]
@@ -20,6 +26,7 @@ node[:deploy].each do |application, deploy|
   opsworks_nodejs do
     deploy_data deploy
     app application
+    env env_vars.join(' ')
   end
 
   ruby_block "restart node.js application #{application}" do
