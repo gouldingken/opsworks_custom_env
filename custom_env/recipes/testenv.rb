@@ -12,5 +12,9 @@ node[:custom_env].each do |k, v|
   Chef::Log.info("added env var: #{k}=#{v}")
 end
 
-Chef::Log.info("env vars for node: #{env_vars.join(' ')}")
 
+
+node[:custom_node_env] = env_vars.join(' ')
+
+
+Chef::Log.info("env vars for node: #{node[:custom_node_env]}")
