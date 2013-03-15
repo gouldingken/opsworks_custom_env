@@ -28,6 +28,7 @@ define :opsworks_nodejs do
     group 'root'
     mode '0644'
     variables(
+        :environment_vars => 'TEST_VAR=setByOverride1 TEST_VAR2=setByOverride2',
         :deploy => deploy,
         :application_name => application,
         :monitored_script => "#{deploy[:deploy_to]}/current/server.js"
