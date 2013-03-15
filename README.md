@@ -1,17 +1,12 @@
 This cookbook can be used to set environment variables for Node.js layers.
 Expects attributes of the form:
 
-    {
-      "custom_env": {
-        "my_app": {
-          "FOO": "http://www.yahoo.com",
-          "BAR": "1001"
-        },
-        "your_app": {
-          "BAZ": "99"
-        }
-      }
-    }
+{
+  "custom_env": {
+  "TEST_VAR": "alongpassword45435",
+  "TEST_VAR2": "1001"
+  }
+}
 
 
 UNDER DEVELOPMENT
