@@ -1,4 +1,4 @@
-Chef::Log.info("Using override for deploy default")
+Chef::Log.info("Using override for deploy default")     #not used as override
 include_recipe 'dependencies'
 
 node[:deploy].each do |application, deploy|
