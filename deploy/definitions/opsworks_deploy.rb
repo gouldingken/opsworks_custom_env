@@ -42,6 +42,7 @@ define :opsworks_deploy do
   end
 
   Chef::Log.debug("Checking out source code of application #{application} with type #{deploy[:application_type]}")
+  Chef::Log.info("xxxxxxxxxxxxxx [override success] xxxxxxxxxxxxxxxxxxxx")
 
   directory "#{deploy[:deploy_to]}/shared/cached-copy" do
     recursive true
