@@ -1,5 +1,16 @@
 Chef::Log.info("Using override for opsworks_nodejs")
 
+#-------------- environment vars (temp location) --------------
+env_vars = Array.new
+node[:custom_env].each do |k, v|
+  env_vars.push("#{k}=#{v}")
+  Chef::Log.info("added env var: #{k}=#{v}")
+end
+node[:custom_node_env] = env_vars.join(' ')
+#------------------------------------
+
+Chef::Log.info("env vars for node: #{node[:custom_node_env]}")
+
 define :opsworks_nodejs do
   deploy = params[:deploy_data]
   application = params[:app]
